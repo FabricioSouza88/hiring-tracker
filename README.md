@@ -18,13 +18,13 @@ The system is designed to handle real-world recruitment scenarios while providin
 
 ```
 ┌─────────────────┐    ┌──────────────────┐
-│   Dummy API     │◄──►│  Agentic Module  │
-│   (FastAPI)     │    │   (AI Agents)    │
+│       API       │◄──►│  Agentic Module  │
+│    (FastAPI)    │    │   (AI Agents)    │
 └─────────────────┘    └──────────────────┘
         │                       │
         ▼                       ▼
 ┌─────────────────┐    ┌──────────────────┐
-│  Mock Database  │    │   LLM Client     │
+│    Database     │    │   LLM Client     │
 │  (In-Memory)    │    │  (AI Services)   │
 └─────────────────┘    └──────────────────┘
 ```
