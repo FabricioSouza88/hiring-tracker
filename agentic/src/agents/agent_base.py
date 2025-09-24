@@ -14,9 +14,10 @@ class AgentBase(ABC):
     - Prompt loading and management
     - Safe template formatting
     """
-    
-    def __init__(self, llm: LLMClient, tools: MCPTools | None = None, scope: str = "") -> None:
-        self.llm = llm
+
+    def __init__(self, llm_client: LLMClient, llm_model: str, tools: MCPTools | None = None, scope: str = "") -> None:
+        self.llm_client = llm_client
+        self.llm_model = llm_model
         self.tools = tools or NoopMCPTools()
         self.scope = scope
         self._prompts: Dict[str, str] = {}
@@ -80,7 +81,7 @@ class AgentBase(ABC):
             Message(role="system", content=system_prompt),
             Message(role="user", content=user_prompt),
         ]
-        response = self.llm.generate(messages, temperature=temperature, max_tokens=max_tokens)
+        response = self.llm_client.generate(messages, model=self.llm_model, temperature=temperature, max_tokens=max_tokens)
         return response.strip()
     
     def _safe_getattr(self, obj: Any, attr: str, default: Any = "") -> Any:

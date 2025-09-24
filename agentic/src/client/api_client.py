@@ -23,14 +23,14 @@ def get_next(endpoint: str) -> Optional[Dict[str, Any]]:
         r.raise_for_status()
         return r.json()
 
-@retry(stop=stop_after_attempt(lambda: appconfig.max_http_retries),
+@retry(stop=stop_after_attempt(lambda: appconfig.MAX_HTTP_RETRIES),
        wait=wait_exponential_jitter(initial=1, max=15))
 def update_status(task_id: str, status: str) -> None:
     with _client() as c:
         r = c.post("/UpdateStatus", json={"task_id": task_id, "status": status})
         r.raise_for_status()
 
-@retry(stop=stop_after_attempt(lambda: appconfig.max_http_retries),
+@retry(stop=stop_after_attempt(lambda: appconfig.MAX_HTTP_RETRIES),
        wait=wait_exponential_jitter(initial=1, max=15))
 def post_report(endpoint: str, payload: Dict[str, Any]) -> None:
     with _client() as c:

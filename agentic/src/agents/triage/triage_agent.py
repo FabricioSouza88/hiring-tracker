@@ -1,4 +1,5 @@
 from __future__ import annotations
+import logging
 from typing import Dict, Any, List
 from domain.models.models import RoleApplication, TriageResult
 from agents.agent_base import AgentBase
@@ -11,12 +12,17 @@ SUMMARY_USER = "triage_summary_user.md"
 RUBRIC_SYS  = "triage_rubric_system.md"
 RUBRIC_USER = "triage_rubric_user.md"
 PROMPT_SCOPE = "triage"
+LLM_MODEL = "gpt-4.1-mini"
 
 class TriageAgent(AgentBase):
     def __init__(self, llm: LLMClient, tools: MCPTools | None = None) -> None:
-        super().__init__(llm, tools, PROMPT_SCOPE)
+        super().__init__(llm, LLM_MODEL, tools, PROMPT_SCOPE)
+
+        logging.basicConfig(level=logging.INFO)
+        self.logger = logging.getLogger(__name__)
         
         # Load prompts using base class method
+        self.llm_model = LLM_MODEL
         self.summary_sys = self._load_prompt(SUMMARY_SYS, "")
         self.summary_user_tpl = self._load_prompt(SUMMARY_USER, "{context}")
         self.rubric_sys = self._load_prompt(RUBRIC_SYS, "")
@@ -27,6 +33,9 @@ class TriageAgent(AgentBase):
         """Full pipeline: enrich → summarize → rubric → parse."""
         enrich = self._enrich(candidate)
         summary_md = self._summarize(candidate, enrich)
+        
+        self.logger.info("Summary Markdown generated.", extra={"summary_md": summary_md})
+
         final_md = self._apply_rubric(
             role_title=getattr(candidate, "role_title", ""),
             role_description=getattr(candidate, "role_description", ""),

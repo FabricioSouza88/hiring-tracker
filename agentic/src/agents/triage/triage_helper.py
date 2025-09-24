@@ -29,8 +29,8 @@ def parse_score_and_decision(text: str) -> Tuple[float | None, str | None, List[
     if m:
         decision = m.group(1).lower()
 
-    # Decision Summary
-    m = re.search(r"Decision[_\s]Summary:\s*(.+)", text, re.IGNORECASE)
+    # Rationale / Feedback
+    m = re.search(r"Rationale:\s*(.+?)(?=\n\s*(?:Score|Decision|Labels)|\Z)", text, re.IGNORECASE | re.DOTALL)
     if m:
         feedback = m.group(1).strip()
 

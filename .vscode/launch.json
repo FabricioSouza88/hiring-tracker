@@ -20,6 +20,35 @@
       "justMyCode": true
     },
     {
+      "name": "Agents (Debug)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/agentic/src/main.py",
+      "args": [
+        "--debug"
+      ],
+      "cwd": "${workspaceFolder}/agentic",
+      "envFile": "${workspaceFolder}/.env",
+      "justMyCode": true
+    },
+    {
+      "name": "Frontend (Streamlit)",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "streamlit",
+      "args": [
+        "run",
+        "app.py",
+        "--server.port",
+        "8501",
+        "--server.address",
+        "0.0.0.0"
+      ],
+      "cwd": "${workspaceFolder}/frontend",
+      "envFile": "${workspaceFolder}/.env",
+      "justMyCode": true
+    },
+    {
       "name": "Run Script (run.sh)",
       "type": "node",
       "request": "launch",
@@ -46,32 +75,6 @@
         "reveal": "always",
         "panel": "new"
       }
-    },
-    {
-      "name": "Agents (runner)",
-      "type": "debugpy",
-      "request": "launch",
-      "program": "${workspaceFolder}/agents/agents/runner.py",
-      "cwd": "${workspaceFolder}/agents",
-      "envFile": "${workspaceFolder}/.env",
-      "justMyCode": true
-    },
-    {
-      "name": "Frontend (Streamlit)",
-      "type": "debugpy",
-      "request": "launch",
-      "module": "streamlit",
-      "args": [
-        "run",
-        "app.py",
-        "--server.port",
-        "8501",
-        "--server.address",
-        "0.0.0.0"
-      ],
-      "cwd": "${workspaceFolder}/frontend",
-      "envFile": "${workspaceFolder}/.env",
-      "justMyCode": true
     }
   ]
 }

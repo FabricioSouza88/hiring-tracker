@@ -19,7 +19,7 @@ def seed_task():
         cand_id="cand123",
         cand_name="Fabricio Souza",
         cand_email="fabricio.collins@gmail.com",
-        cand_resume_text="I am a Backend Specialist and Solution Architect with over 10 years of experience in developing and architecting scalable and resilient systems and APIs. My main focus is on backend with .NET (C#) and Java, cloud solution architecture (Azure and AWS), and applying modern patterns such as microservices, event-driven architecture, and clean architecture.",
+        cand_summary="I am a Backend Specialist and Solution Architect with over 10 years of experience in developing and architecting scalable and resilient systems and APIs. My main focus is on backend with .NET (C#) and Java, cloud solution architecture (Azure and AWS), and applying modern patterns such as microservices, event-driven architecture, and clean architecture.",
         cand_linkedin_url="https://www.linkedin.com/in/fabriciosouza88",
         cand_github_url="https://github.com/FabricioSouza88",
         cand_portfolio_url="https://fabriciosouza88.github.io/",

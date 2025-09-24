@@ -5,7 +5,6 @@ load_dotenv()
 
 ENV = os.getenv("ENV", "local")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-OPENAI_API_MODEL = os.getenv("OPENAI_API_MODEL", "gpt-4.1")
 UPDATE_STATUS_ON_COMPLETE = os.getenv("UPDATE_STATUS_ON_COMPLETE", "true").lower() == "true"
 LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO").upper()
 POLL_INTERVAL_SECONDS = int(os.getenv("POLL_INTERVAL_SECONDS", "10"))

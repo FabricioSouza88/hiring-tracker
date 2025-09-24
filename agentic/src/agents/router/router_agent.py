@@ -1,12 +1,11 @@
 import logging
-from typing import Optional
 from agents.router.types import GET_NEXT_ENDPOINT, UPDATE_REPORT_ENDPOINT
 from domain.enums.eval_stage_enum import EvalStage
 from client.api_client import get_next, update_status, post_report
 from domain.models.models import TriageTask, RoleApplication, TriageReportPayload
 from agents.triage.triage_agent import TriageAgent
-from domain.interfaces.llm_client import LLMClient
-from mcp.mcp_tools import MCPTools, NoopMCPTools
+from mcp.mcp_tools import NoopMCPTools
+from client.openai_client import OpenAIClient
 import appconfig
 
 class RouterAgent:
@@ -15,8 +14,8 @@ class RouterAgent:
     On each tick, tries TRIAGE -> TEST -> REPORT and processes the first available.
     """
 
-    def __init__(self, llm: LLMClient, tools: MCPTools | None = None) -> None:
-        self.triage_agent = TriageAgent(llm=llm, tools=tools or NoopMCPTools())
+    def __init__(self) -> None:
+        self.triage_agent = TriageAgent(llm=OpenAIClient(), tools=NoopMCPTools())
         # self.test_agent = TestAgent()      # quando existir
         # self.report_agent = ReportAgent()  # quando existir
 

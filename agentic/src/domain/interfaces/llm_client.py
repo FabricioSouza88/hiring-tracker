@@ -11,5 +11,5 @@ class Message:
 class LLMClient(ABC):
     """Abstract LLM client; implement with OpenAI, Azure, or Vertex."""
     @abstractmethod
-    def generate(self, messages: List[Message], temperature: float = 0.2, max_tokens: int = 1000) -> str:
+    def generate(self, messages: List[Message], model: str = None, temperature: float = 0.2, max_tokens: int = 1000) -> str:
         ...
