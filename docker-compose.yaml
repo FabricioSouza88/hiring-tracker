@@ -1,0 +1,42 @@
+version: "3.9"
+
+services:
+  api:
+    build: ./api
+    env_file: .env
+    depends_on:
+      - db
+      - mq
+      - azurite
+    ports:
+      - "8080:8080"
+
+  agentic:
+    build: ./agentic
+    env_file: .env
+    depends_on:
+      - api
+      - mq
+
+  frontend:
+    build: ./frontend
+    env_file: .env
+    depends_on:
+      - api
+    ports:
+      - "8501:8501"
+
+  migrator:
+    build: ./migrations/runner
+    env_file: .env
+    depends_on:
+      - db
+    command: ["python","run_migrations.py"]
+
+# Referenciar serviços de infra quando os dois arquivos forem usados juntos (override com -f infra -f app)
+  db:
+    external: true
+  azurite:
+    external: true
+  mq:
+    external: true

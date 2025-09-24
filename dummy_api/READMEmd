@@ -1,0 +1,8 @@
+# Como rodar
+
+```shell
+cd dummy_api
+./.venv/Scripts/activate
+pip install -r requirements.txt
+uvicorn main:app --reload --port 5000
+```

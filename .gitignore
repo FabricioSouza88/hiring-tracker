@@ -1,0 +1,11 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+.env
+# Node/Front (se houver no futuro)
+node_modules/
+# Docker
+*.log
+# Misc
+.DS_Store
